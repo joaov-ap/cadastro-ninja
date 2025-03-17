@@ -15,28 +15,28 @@ public class MissoesController {
         this.missoesService = missoesService;
     }
 
-    @PostMapping("create")
-    public String createMission() {
-        return "Mission created successfully";
+    @PostMapping("/create")
+    public MissoesModel createMission(@RequestBody MissoesModel missao) {
+        return missoesService.createMission(missao);
     }
 
-    @GetMapping("show")
+    @GetMapping("/show")
     public List<MissoesModel> showMissions() {
         return missoesService.showMissions();
     }
 
-    @GetMapping("show/{id}")
+    @GetMapping("/show/{id}")
     public MissoesModel showMissionsById(@PathVariable Long id) {
         Optional<MissoesModel> missoesOptional = missoesService.showMissionsById(id);
         return missoesOptional.orElse(null);
     }
 
-    @PutMapping("update")
+    @PutMapping("/update")
     public String updateMission() {
         return "Mission updated successfully";
     }
 
-    @DeleteMapping("delete")
+    @DeleteMapping("/delete")
     public String deleteMission() {
         return "Mission deleted successfully";
     }
