@@ -3,6 +3,7 @@ package dev.joaov.cadastroNinja.Ninja;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("ninjas")
@@ -24,9 +25,10 @@ public class NinjaController {
         return ninjaService.showNinjas();
     }
 
-    @GetMapping("/showById")
-    public String showNinjaById() {
-        return "Show Ninja by id";
+    @GetMapping("/show/{id}")
+    public NinjaModel showNinjaById(@PathVariable Long id) {
+        Optional<NinjaModel> ninjaOptional = ninjaService.showNinjaById(id);
+        return ninjaOptional.orElse(null);
     }
 
     @PutMapping("/update")
