@@ -2,9 +2,17 @@ package dev.joaov.cadastroNinja.Missoes;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("missoes")
 public class MissoesController {
+
+    private MissoesService missoesService;
+
+    public MissoesController(MissoesService missoesService) {
+        this.missoesService = missoesService;
+    }
 
     @PostMapping("create")
     public String createMission() {
@@ -12,8 +20,8 @@ public class MissoesController {
     }
 
     @GetMapping("show")
-    public String showMissions() {
-        return "Missions listed successfully";
+    public List<MissoesModel> showMissions() {
+        return missoesService.showMissions();
     }
 
     @PutMapping("update")
