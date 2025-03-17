@@ -3,7 +3,7 @@ package dev.joaov.cadastroNinja.Ninja;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping
+@RequestMapping("ninjas")
 public class NinjaController {
 
     @PostMapping("/create")
