@@ -3,6 +3,7 @@ package dev.joaov.cadastroNinja.Missoes;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("missoes")
@@ -22,6 +23,12 @@ public class MissoesController {
     @GetMapping("show")
     public List<MissoesModel> showMissions() {
         return missoesService.showMissions();
+    }
+
+    @GetMapping("show/{id}")
+    public MissoesModel showMissionsById(@PathVariable Long id) {
+        Optional<MissoesModel> missoesOptional = missoesService.showMissionsById(id);
+        return missoesOptional.orElse(null);
     }
 
     @PutMapping("update")
