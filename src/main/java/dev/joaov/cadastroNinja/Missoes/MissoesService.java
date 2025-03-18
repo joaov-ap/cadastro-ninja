@@ -21,7 +21,12 @@ public class MissoesService {
     public Optional<MissoesModel> showMissionsById(Long id) {
         return missoesRepository.findById(id);
     }
+
     public MissoesModel createMission(MissoesModel missao) {
         return missoesRepository.save(missao);
+    }
+
+    public void deleteMission(Long id) {
+        missoesRepository.deleteById(id);
     }
 }

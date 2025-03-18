@@ -36,10 +36,9 @@ public class MissoesController {
         return "Mission updated successfully";
     }
 
-    @DeleteMapping("/delete")
-    public String deleteMission() {
-        return "Mission deleted successfully";
+    @DeleteMapping("/delete/{id}")
+    public void deleteMission(@PathVariable Long id) {
+        missoesService.deleteMission(id);
     }
-
 
 }
