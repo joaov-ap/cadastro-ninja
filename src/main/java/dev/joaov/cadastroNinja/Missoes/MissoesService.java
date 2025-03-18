@@ -14,6 +14,10 @@ public class MissoesService {
         this.missoesRepository = missoesRepository;
     }
 
+    public MissoesModel createMission(MissoesModel missao) {
+        return missoesRepository.save(missao);
+    }
+
     public List<MissoesModel> showMissions() {
         return missoesRepository.findAll();
     }
@@ -22,7 +26,12 @@ public class MissoesService {
         return missoesRepository.findById(id);
     }
 
-    public MissoesModel createMission(MissoesModel missao) {
+    public MissoesModel updateMission(Long id, MissoesModel missao) {
+        if (!missoesRepository.existsById(id)) {
+            return null;
+        }
+
+        missao.setId(id);
         return missoesRepository.save(missao);
     }
 

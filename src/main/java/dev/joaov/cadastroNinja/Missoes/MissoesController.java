@@ -31,9 +31,9 @@ public class MissoesController {
         return missoesOptional.orElse(null);
     }
 
-    @PutMapping("/update")
-    public String updateMission() {
-        return "Mission updated successfully";
+    @PutMapping("/update/{id}")
+    public MissoesModel updateMission(@PathVariable Long id, @RequestBody MissoesModel missao) {
+        return missoesService.updateMission(id, missao);
     }
 
     @DeleteMapping("/delete/{id}")
