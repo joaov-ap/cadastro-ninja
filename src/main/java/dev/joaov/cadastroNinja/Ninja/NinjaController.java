@@ -21,18 +21,17 @@ public class NinjaController {
     }
 
     @GetMapping("/show")
-    public List<NinjaModel> showNinjas() {
+    public List<NinjaDTO> showNinjas() {
         return ninjaService.showNinjas();
     }
 
     @GetMapping("/show/{id}")
-    public NinjaModel showNinjaById(@PathVariable Long id) {
-        Optional<NinjaModel> ninjaOptional = ninjaService.showNinjaById(id);
-        return ninjaOptional.orElse(null);
+    public NinjaDTO showNinjaById(@PathVariable Long id) {
+        return ninjaService.showNinjaById(id);
     }
 
     @PutMapping("/update/{id}")
-    public NinjaModel updateNinja(@PathVariable Long id, @RequestBody NinjaModel ninja) {
+    public NinjaDTO updateNinja(@PathVariable Long id, @RequestBody NinjaDTO ninja) {
         return ninjaService.updateNinja(id, ninja);
     }
 

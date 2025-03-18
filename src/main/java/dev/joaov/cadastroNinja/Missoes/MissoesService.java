@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class MissoesService {
@@ -22,21 +23,28 @@ public class MissoesService {
         return missoesMapper.map(missoes);
     }
 
-    public List<MissoesModel> showMissions() {
-        return missoesRepository.findAll();
+    public List<MissoesDTO> showMissions() {
+        List<MissoesModel> missoes = missoesRepository.findAll();
+        return missoes.stream()
+                .map(missoesMapper::map)
+                .collect(Collectors.toList());
     }
 
-    public Optional<MissoesModel> showMissionsById(Long id) {
-        return missoesRepository.findById(id);
+    public MissoesDTO showMissionsById(Long id) {
+        Optional<MissoesModel> missao = missoesRepository.findById(id);
+        return missao.map(missoesMapper::map).orElse(null);
     }
 
-    public MissoesModel updateMission(Long id, MissoesModel missao) {
-        if (!missoesRepository.existsById(id)) {
+    public MissoesDTO updateMission(Long id, MissoesDTO missaoDto) {
+        Optional<MissoesModel> missaoExiste = missoesRepository.findById(id);
+        if (!missaoExiste.isPresent()) {
             return null;
         }
 
+        MissoesModel missao = missoesMapper.map(missaoDto);
         missao.setId(id);
-        return missoesRepository.save(missao);
+        MissoesModel editedMissao = missoesRepository.save(missao);
+        return missoesMapper.map(editedMissao);
     }
 
     public void deleteMission(Long id) {
