@@ -16,23 +16,22 @@ public class MissoesController {
     }
 
     @PostMapping("/create")
-    public MissoesModel createMission(@RequestBody MissoesModel missao) {
+    public MissoesDTO createMission(@RequestBody MissoesDTO missao) {
         return missoesService.createMission(missao);
     }
 
     @GetMapping("/show")
-    public List<MissoesModel> showMissions() {
+    public List<MissoesDTO> showMissions() {
         return missoesService.showMissions();
     }
 
     @GetMapping("/show/{id}")
-    public MissoesModel showMissionsById(@PathVariable Long id) {
-        Optional<MissoesModel> missoesOptional = missoesService.showMissionsById(id);
-        return missoesOptional.orElse(null);
+    public MissoesDTO showMissionsById(@PathVariable Long id) {
+        return missoesService.showMissionsById(id);
     }
 
     @PutMapping("/update/{id}")
-    public MissoesModel updateMission(@PathVariable Long id, @RequestBody MissoesModel missao) {
+    public MissoesDTO updateMission(@PathVariable Long id, @RequestBody MissoesDTO missao) {
         return missoesService.updateMission(id, missao);
     }
 
