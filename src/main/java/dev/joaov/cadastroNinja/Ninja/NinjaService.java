@@ -44,6 +44,27 @@ public class NinjaService {
 
         NinjaModel ninja = ninjaMapper.map(ninjaDto);
         ninja.setId(id);
+
+        if (ninja.getNome() == null) {
+            ninja.setNome(ninjaExiste.get().getNome());
+        }
+
+        if (ninja.getEmail() == null) {
+            ninja.setEmail(ninjaExiste.get().getEmail());
+        }
+
+        if (ninja.getRank() == null) {
+            ninja.setRank(ninjaExiste.get().getRank());
+        }
+
+        if (ninja.getIdade() == 0) {
+            ninja.setIdade(ninjaExiste.get().getIdade());
+        }
+
+        if (ninja.getMissoes() == null) {
+            ninja.setMissoes(ninjaExiste.get().getMissoes());
+        }
+
         NinjaModel editedNinja = ninjaRepository.save(ninja);
         return ninjaMapper.map(editedNinja);
     }

@@ -43,6 +43,19 @@ public class MissoesService {
 
         MissoesModel missao = missoesMapper.map(missaoDto);
         missao.setId(id);
+
+        if (missao.getNome() == null) {
+            missao.setNome(missaoExiste.get().getNome());
+        }
+
+        if (missao.getDificuldade() == null) {
+            missao.setDificuldade(missaoExiste.get().getDificuldade());
+        }
+
+        if (missao.getNinjas() == null) {
+            missao.setNinjas(missaoExiste.get().getNinjas());
+        }
+
         MissoesModel editedMissao = missoesRepository.save(missao);
         return missoesMapper.map(editedMissao);
     }
