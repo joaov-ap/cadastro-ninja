@@ -1,5 +1,6 @@
 package dev.joaov.cadastroNinja.Missoes;
 
+import dev.joaov.cadastroNinja.Ninja.NinjaModel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -61,6 +62,22 @@ public class MissoesService {
     }
 
     public void deleteMission(Long id) {
+        Optional<MissoesModel> missao = missoesRepository.findById(id);
+
+        if (missao.isEmpty()) {
+            return;
+        }
+
+        if (missao.get().getNinjas() != null) {
+            for (NinjaModel ninja: missao.get().getNinjas()) {
+                ninja.setMissoes(null);
+            }
+
+            missoesRepository.save(missao.get());
+            missoesRepository.deleteById(id);
+            return;
+        }
+
         missoesRepository.deleteById(id);
     }
 }
